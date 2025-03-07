@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Servicios Exequiales</title>
+    
+</head>
+<body>
+    <div class="menu-toggle" onclick="toggleMenu()"></div>
+    <div class="menu">
+        <a href="/">Inicio</a>
+        <a href="/nosotros/nosotros.html">Nosotros</a>
+        <a href="/servicio/servicios.html">Servicios</a>
+        <a href="/contacto/contacto.html">Contacto</a>
+    </div>
+
+    <div class="container">
+        <div class="content-left">
+            <h1>Bienvenido a nuestros Servicios Exequiales</h1>
+            <p>En estos momentos tan delicados, te ofrecemos soluciones personalizadas para brindarte el apoyo que necesitas. Contamos con un equipo altamente capacitado dispuesto a ayudarte en cada paso del proceso. Ya sea que necesites asesoramiento para la planificación de servicios o asistencia directa, estamos aquí para guiarte con sensibilidad y respeto.</p>
+
+            <p class="highlight">Sabemos lo importante que es contar con un acompañamiento que entienda tus necesidades y brinde soluciones que se ajusten a tus deseos. Nuestro compromiso es brindarte la tranquilidad que necesitas, ofreciéndote opciones flexibles y adaptadas a tu situación.</p>
+
+            <h2>Nuestros Servicios</h2>
+            <p>Conoce más sobre las soluciones que ofrecemos en servicios exequiales y cómo podemos apoyarte en estos momentos difíciles. Desde servicios funerarios completos hasta opciones personalizadas, nuestro equipo estará contigo en cada etapa.</p>
+        </div>
+
+        <div class="content-right">
+            <!-- Este espacio se puede utilizar para contenido adicional si lo deseas -->
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            menu.classList.toggle('active');
+            menuToggle.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
