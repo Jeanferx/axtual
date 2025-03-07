@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Exequiales</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/imagenes/estatua.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ecf0f1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+
+        .menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px 0;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 30px;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 0 10px 10px 0;
+            z-index: 100;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1.2em;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: block;
+        }
+
+        .menu a:hover {
+            background-color: #16a085;
+            transform: scale(1.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8em;
+            color: #ecf0f1;
+            padding: 15px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 150;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .menu-toggle:before {
+            content: '\2630'; /* Icono de menú (hamburguesa) */
+        }
+
+        .menu-toggle.open:before {
+            content: '\2715'; /* Icono de "X" cuando el menú está abierto */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+            margin-left: 270px;
+            width: calc(100% - 240px);
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #f1c40f;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #ecf0f1;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-top: 15px;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        .service-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .service-list li {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideFromLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideFromRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .services-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0);
+            margin: 50px auto;
+            border-radius: 10px;
+            width: 80%;
+            margin-top: 20px;
+            margin-left: 270px;
+        }
+
+        .services-section h2 {
+            font-size: 2.5em;
+            color: #f1c40f;
+            margin-bottom: 30px;
+        }
+
+        .services-container {
+    display: flex;
+    justify-content: space-between; /* Distribuye los cuadros con espacio entre ellos */
+    gap: 20px; /* Espacio mínimo entre los cuadros */
+    flex-wrap: nowrap; /* Evita que los cuadros se muevan a una nueva fila */
+    padding: 0 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+.service-card {
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 20px;
+    width: 30%; /* El ancho de cada cuadro es el 30% del contenedor */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+
+        .service-card h3 {
+            color: #f1c40f;
+            font-size: 2em;
+        }
+
+        .service-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .purchase-prompt {
+            background-color: #16a085;
+            color: #ecf0f1;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            animation: example 4s infinite;
+            width: 75%;
+            position: relative;
+            margin: 40px auto;
+        }
+
+        .purchase-prompt h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .purchase-prompt p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .purchase-prompt .btn-contact {
+            background-color: #f1c40f;
+            color: #34495e;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .purchase-prompt .btn-contact:hover {
+            background-color: #f39c12;
+        }
+
+        @keyframes example {
+            0%   {background-color: rgba(255, 0, 0, 0.322);}
+            25%  {background-color: rgba(255, 255, 0, 0.322);}
+            50%  {background-color: rgba(0, 0, 255, 0.322);}
+            100% {background-color: rgba(0, 128, 0, 0.322);}
+        }
+
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+    .menu {
+        position: absolute;
+        left: -100%;
+        width: 100%;
+        top: 0;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .menu.active {
+        left: 0;
+    }
+
+    .container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .services-section {
+        margin-left: -20px; /* Mover la sección a la izquierda */
+        width: 100%;
+        padding: 20px;
+    }
+
+    .services-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: -10px; /* Ajuste para mover los cuadros a la izquierda */
+    }
+
+    .service-card {
+        width: 90%; /* Ajustado para que se vea bien en móvil */
+        margin-bottom: 20px;
+    }
+
+    .purchase-prompt {
+        width: 90%; /* Aumenta el tamaño en pantallas pequeñas */
+        margin-left: 10%; /* Ajusta el margen izquierdo */
+    }
+}
+.purchase-prompt {
+    margin-left: 20%; /* Mueve el cuadro a la derecha */
+    margin-right: auto;
+    text-align: center;
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 20px;
+    width: 50%; /* Ajusta el ancho del cuadro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.purchase-prompt:hover {
+    transform: scale(1.05);
+}
+
+.btn-contact {
+    background-color: #e67e22;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-contact:hover {
+    background-color: #d35400;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="menu-toggle" onclick="toggleMenu()"></div>
+    <div class="menu">
+        <a href="/portada/portada.html">Inicio</a>
+        <a href="/nosotros/nosotros.html">Nosotros</a>
+        <a href="/servicio/servicios.html">Servicios</a>
+        <a href="#">Contacto</a>
+    </div>
+
+    <div class="services-section">
+        <h2>Nuestros Servicios</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <h3>Asesoría</h3>
+                <p>Te brindamos apoyo para gestionar todos los aspectos funerarios en los momentos más difíciles.</p>
+            </div>
+            <div class="service-card">
+                <h3>Traslado</h3>
+                <p>Realizamos el traslado de restos humanos a nivel nacional e internacional con total seguridad y rapidez.</p>
+            </div>
+            <div class="service-card">
+                <h3>Documentos Legales</h3>
+                <p>Nos encargamos de todo lo relacionado con los documentos legales para trámites post-mortem.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="purchase-prompt">
+        <h3>¿Interesado en nuestros servicios?</h3>
+        <p>Contacta con nosotros y recibe una asesoría personalizada.</p>
+        <a href="mailto:contacto@servicios.com" class="btn-contact">Contáctanos</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

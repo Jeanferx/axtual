@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Servicios Exequiales</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        .menu {
+            position: fixed;
+            left: 0; /* Fijo en la izquierda para PC */
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px 0;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 30px;
+            z-index: 100;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1.2em;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: block;
+        }
+        .menu a:hover {
+            background-color: #16a085;
+            transform: scale(1.1);
+        }
+        .menu-toggle {
+            display: none; /* Solo aparece en móvil */
+            font-size: 1.8em;
+            color: #ecf0f1;
+            padding: 15px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 150;
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu-toggle.open {
+            transform: rotate(180deg);
+        }
+        .menu-toggle:before {
+            content: '\2630'; /* Icono de menú (hamburguesa) */
+        }
+        .menu-toggle.open:before {
+            content: '\2715'; /* Icono de "X" cuando el menú está abierto */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+            margin-left: 270px; /* Para PC, el contenido se aleja del menú */
+            width: calc(100% - 240px);
+            justify-content: center;
+            background-image: url('/imagenes/fondoB.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; /* Asegura que la imagen no se repita */
+        }
+        .content-left {
+            max-width: 700px;
+            margin-right: 20px;
+            animation: slideFromLeft 1s ease-out;
+            color: #ffffff;
+        }
+        .content-right {
+            max-width: 400px;
+            height: auto;
+            animation: slideFromRight 1s ease-out;
+        }
+        h1 {
+            font-size: 2.5em;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+        h2 {
+            font-size: 2em;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-top: 15px;
+            animation: fadeInText 1.2s ease-in-out;
+        }
+        .form-container {
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInText 1.2s ease-in-out;
+        }
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        .form-container input[type="submit"] {
+            background-color: #16a085;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #1abc9c;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideFromLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideFromRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+            .menu {
+                position: absolute;
+                left: -100%;
+                width: 100%;
+                top: 0;
+                transition: left 0.3s ease-in-out;
+            }
+            .menu.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .container {
+                margin-left: 0;
+                width: 100%;
+                background-image: url('/imagenes/fondoB.jpg'); /* Mantén la misma imagen en móvil */
+                background-size: cover; /* Asegura que la imagen se cubra completamente */
+                background-position: center; /* Mantén la imagen centrada */
+                background-repeat: no-repeat; /* Asegura que no se repita la imagen */
+            }
+            .content-left, .content-right {
+                max-width: 100%;
+                margin-right: 0;
+                margin-left: 0;
+            }
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .content-right {
+                order: 2;
+                margin-top: 20px;
+            }
+            .content-left {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-toggle" onclick="toggleMenu()"></div>
+    <div class="menu">
+        <a href="/">Inicio</a>
+        <a href="/nosotros/nosotros.html">Nosotros</a>
+        <a href="/servicio/servicios.html">Servicios</a>
+        <a href="/contacto/contacto.html">Contacto</a>
+    </div>
+
+    <div class="container">
+        <div class="content-left">
+            <h1>Bienvenido a nuestros Servicios Exequiales</h1>
+            <p>Ofrecemos soluciones personalizadas para todos tus requerimientos de servicios exequiales. Nuestra misión es brindarte la mejor atención en estos momentos tan delicados.</p>
+
+            <h2>Nuestros Servicios</h2>
+            <p>Te invitamos a conocer más sobre los servicios que ofrecemos para brindarte el apoyo necesario durante los momentos difíciles.</p>
+        </div>
+
+        <!-- Eliminada la imagen, ahora el fondo está en el contenedor -->
+        <div class="content-right">
+            <!-- Este espacio se puede utilizar para contenido adicional si lo deseas -->
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            menu.classList.toggle('active');
+            menuToggle.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
